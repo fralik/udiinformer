@@ -12,11 +12,17 @@ This repo can be used to automate this task.
 
 ## What it does
 
-This is a small script that logins to UDI with your personal credentials, opens the very first
+This is a small script (`main.py`) that logins to UDI with your personal credentials, opens the very first
 application and checks if there is an error message presented on the page. If there is no error message,
 then the script will send a message and page screenshot to a Telegram bot.
 
+There is another script (`rebook.py`), which may be used to check newly available spots that are earlier
+than your booked appointment. This may be useful when you've booked time at UDI, but still would like
+to reschedule it to an earlier slot. Such slots open up from time to time when other people give up their time.
+
 ## Usage
+
+You will need to create your own Telegram Bot. It is very easy, see https://telegram.me/BotFather .
 
 1. Create python virtual environment.
 2. Clone the code `git clone https://github.com/fralik/udiinformer.git`.
@@ -31,6 +37,6 @@ then the script will send a message and page screenshot to a Telegram bot.
     * Set environment variables `UDI_EMAIL`, `UDI_PWD`.
      * Modify `main.py` file and provide your credentials right in the source code.
   to write your credentials there.
-5. `python main.py`.
+5. `python main.py` for *available time slot* script and `python rebook.py` in order to find rebooking possibility.
 
  I advise to use this script from a cron job or scheduled task.

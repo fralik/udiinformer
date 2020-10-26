@@ -22,7 +22,7 @@ def main():
     with sync_playwright() as p:
         browser = p.chromium.launch()
         page = browser.newPage()
-        page.goto("https://selfservice.udi.no/")
+        page.goto("https://selfservice.udi.no/en-gb/")
         page.click("#ctl00_BodyRegion_PageRegion_MainRegion_LogInHeading")
 
         page.type("input[type=email]", config.EMAIL)
@@ -30,8 +30,9 @@ def main():
         page.click("#next")
 
         try:
-            # book appointment
-            page.click("#ctl00_BodyRegion_PageRegion_MainRegion_IconNavigationTile2_heading")
+            book_btn_id: str = "#ctl00_BodyRegion_PageRegion_MainRegion_IconNavigationTile2_heading"
+            page.waitForSelector(book_btn_id)
+            page.click(book_btn_id)
         except playwright.helper.TimeoutError:
             msg = "Failed to login. Check your password."
             print(msg)
@@ -48,7 +49,6 @@ def main():
                 "#ctl00_PageRegion_MainContentRegion_ViewControl_spnReceiptAndBooking_divErrorMessageForNoAvailabelAppointments",
                 timeout=5000,
             )
-            # No appointments
             print("No appointments")
             return
         except playwright.helper.TimeoutError:

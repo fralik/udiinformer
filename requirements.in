@@ -1,3 +1,4 @@
 telegram-send
 playwright
 pydantic[dotenv]
+dateparser
