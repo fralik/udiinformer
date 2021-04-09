@@ -22,12 +22,18 @@ def main():
     with sync_playwright() as p:
         browser = p.chromium.launch()
         page = browser.newPage()
-        page.goto("https://selfservice.udi.no/en-gb/")
-        page.click("#ctl00_BodyRegion_PageRegion_MainRegion_LogInHeading")
+        try:
+            page.goto("https://selfservice.udi.no/en-gb/")
+            page.click("#ctl00_BodyRegion_PageRegion_MainRegion_LogInHeading")
 
-        page.type("input[type=email]", config.EMAIL)
-        page.type("input[type=password]", config.PWD.get_secret_value())
-        page.click("#next")
+            page.type("input[type=email]", config.EMAIL)
+            page.type("input[type=password]", config.PWD.get_secret_value())
+            page.click("#next")
+        except playwright.helper.TimeoutError:
+            msg = "Seems like UDI website is down or you are offline"
+            print(msg)
+            telegram_send.send(messages=[msg])
+            return
 
         try:
             book_btn_id: str = "#ctl00_BodyRegion_PageRegion_MainRegion_IconNavigationTile2_heading"
