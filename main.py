@@ -1,8 +1,6 @@
 import tempfile
-
-import playwright.helper
 import telegram_send
-from playwright import sync_playwright
+from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeoutError
 from pydantic import BaseSettings, SecretStr
 
 
@@ -21,7 +19,7 @@ def main():
 
     with sync_playwright() as p:
         browser = p.chromium.launch()
-        page = browser.newPage()
+        page = browser.new_page()
         try:
             page.goto("https://selfservice.udi.no/en-gb/")
             page.click("#ctl00_BodyRegion_PageRegion_MainRegion_LogInHeading")
@@ -29,7 +27,7 @@ def main():
             page.type("input[type=email]", config.EMAIL)
             page.type("input[type=password]", config.PWD.get_secret_value())
             page.click("#next")
-        except playwright.helper.TimeoutError:
+        except PlaywrightTimeoutError:
             msg = "Seems like UDI website is down or you are offline"
             print(msg)
             telegram_send.send(messages=[msg])
@@ -37,7 +35,7 @@ def main():
 
         try:
             book_btn_id: str = "#ctl00_BodyRegion_PageRegion_MainRegion_IconNavigationTile2_heading"
-            page.waitForSelector(book_btn_id)
+            page.wait_for_selector(book_btn_id)
             page.click(book_btn_id)
         except playwright.helper.TimeoutError:
             msg = "Failed to login. Check your password."
@@ -51,13 +49,13 @@ def main():
         )
 
         try:
-            page.waitForSelector(
+            page.wait_for_selector(
                 "#ctl00_PageRegion_MainContentRegion_ViewControl_spnReceiptAndBooking_divErrorMessageForNoAvailabelAppointments",
                 timeout=5000,
             )
             print("No appointments")
             return
-        except playwright.helper.TimeoutError:
+        except PlaywrightTimeoutError:
             msg = "Looks like UDI is ready for appointments"
             telegram_send.send(messages=[msg])
 
