@@ -3,8 +3,11 @@ import dateparser
 import datetime
 import telegram_send
 from calendar import monthrange
-from playwright.sync_api import sync_playwright,
-     Page as PlaywrightPage, TimeoutError as PlaywrightTimeoutError
+from playwright.sync_api import (
+    sync_playwright, 
+    Page as PlaywrightPage, 
+    TimeoutError as PlaywrightTimeoutError
+)
 from pydantic import BaseSettings, SecretStr
 
 
