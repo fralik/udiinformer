@@ -22,13 +22,10 @@ to reschedule it to an earlier slot. Such slots open up from time to time when o
 
 ## Limitations
 
-1. These scripts can not be used with applications for the citizenship.
-2. There is a small bug in `rebook.py`.
-
-There is an app in the [Windows store](https://www.microsoft.com/store/apps/9P525JWRRMT2), which doesn't
-have the above limitations. It is easy to install and use. Notifies you on the computer itself
-and on e-mail. Check it out if you are on Windows!
-Link: https://www.microsoft.com/store/apps/9P525JWRRMT2
+These scripts can not be used with applications for the citizenship. There is an app in the 
+[Windows store](https://www.microsoft.com/store/apps/9P525JWRRMT2), which doesn't have the above limitations. 
+It is easy to install and use. Notifies you on the computer itself and on e-mail. Check it out if you are on 
+Windows! Link: https://www.microsoft.com/store/apps/9P525JWRRMT2
 
 ## Usage
 
