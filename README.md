@@ -22,10 +22,12 @@ to reschedule it to an earlier slot. Such slots open up from time to time when o
 
 ## Limitations
 
-These scripts can not be used with applications for the citizenship. There is an app in the 
+* These scripts can not be used with applications for the citizenship. There is an app in the 
 [Windows store](https://www.microsoft.com/store/apps/9P525JWRRMT2), which doesn't have the above limitations. 
 It is easy to install and use. Notifies you on the computer itself and on e-mail. Check it out if you are on 
 Windows! Link: https://www.microsoft.com/store/apps/9P525JWRRMT2
+* As of **25.09.2022**, UDI changed the inner structer of their website. These scripts won't work out of the box
+and will need modifications. The app from Windows store supports new changes.
 
 ## Usage
 
